@@ -1,10 +1,12 @@
 package com.example.sasyg.gametutorial;
 
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 
 public class GameActivity extends AppCompatActivity {
 
@@ -16,7 +18,15 @@ public class GameActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //Initializing game view object
-        gameView = new GameView(this);
+        Display display = getWindowManager().getDefaultDisplay();
+
+        //Getting the screen resolution into point object
+        Point size = new Point();
+        display.getSize(size);
+
+        //Initializing game view object
+        //this time we are also passing the screen size to the GameView constructor
+        gameView = new GameView(this, size.x, size.y);
 
         //adding it to contentview
         setContentView(gameView);
